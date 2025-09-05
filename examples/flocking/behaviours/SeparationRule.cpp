@@ -16,7 +16,19 @@ Vector2f SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Bo
   //        // todo: find and apply force only on the closest mates
   //    }
 
-  separatingForce = Vector2f::normalized(separatingForce);
+  
+
+  for (Boid* neighbor : neighborhood)
+  {
+     Vector2f delta =  (boid->getPosition() - neighbor->getPosition());
+     auto hat = delta.normalized();
+     auto mag = delta.getMagnitude();
+
+    separatingForce += ( hat / mag);
+  }
+
+
+ // separatingForce = Vector2f::normalized(separatingForce);
 
   return separatingForce;
 }

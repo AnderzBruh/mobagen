@@ -13,7 +13,7 @@ private:
   /// MEMBERS
   /// Configuration
   // Boids
-  int nbBoids = 300;
+  int nbBoids = 1000;
 
   bool hasConstantSpeed = false;
   float desiredSpeed = 120.0f;
@@ -21,7 +21,7 @@ private:
   bool hasMaxAcceleration = false;
   float maxAcceleration = 10.0f;
 
-  float detectionRadius = 35;
+  float detectionRadius = 20;
 
   // Display
   bool showRadius = false;

@@ -21,7 +21,7 @@ World::World(Engine* pEngine) : GameObject(pEngine) {}
 void World::initializeRules() {
   // Starting Rules
   // parameters: desired separation, weight
-  boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 4.75f));
+  boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 100.f));
   // parameters: weight
   boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 4.25f));
   // parameters: weight
