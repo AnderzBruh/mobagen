@@ -9,14 +9,35 @@ Vector2f CohesionRule::computeForce(const std::vector<Boid*>& neighborhood, Boid
 
   // find center of mass
 
+    bool nearEnemy = false;
+
+
   if (neighborhood.size() > 0) {
+
     for (Boid* neighbor : neighborhood) {
-      cohesionForce += neighbor->getPosition();
+
+      if (!neighbor->getIfEnemy()) // ignores coheding with enemies and flags it if it sees one
+      {
+        cohesionForce += neighbor->getPosition();
+      } else 
+      {
+        nearEnemy = true;
+      }
+
     }
     cohesionForce /= neighborhood.size();
 
     cohesionForce -= boid->getPosition();
 
   }
+
+  if (boid->getIfEnemy()) { // so the enemy does not slow down as it gets closer to its target, multiplied so it gives more "chase"
+    cohesionForce = cohesionForce.normalized() * 500;
+  }
+
+  if (nearEnemy) { //if it gets scared it will ignore it's local flock so it can run away
+    cohesionForce = Vector2f::zero();
+  }
+
   return cohesionForce;
 }

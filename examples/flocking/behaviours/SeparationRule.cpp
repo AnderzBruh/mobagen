@@ -16,17 +16,22 @@ Vector2f SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Bo
   //        // todo: find and apply force only on the closest mates
   //    }
 
+
+    for (Boid* neighbor : neighborhood) {
+      if (!(boid->getIfEnemy() && !(neighbor->getIfEnemy()))) {// ignores separation for enemies who have targets close
+        Vector2f delta = (boid->getPosition() - neighbor->getPosition());
+        auto hat = delta.normalized();
+        auto mag = delta.getMagnitude();
+
+        if (neighbor->getIfEnemy()) {// no curve on separation of an enemy, if it sees one on the edge it will imediately go away with speed
+          hat *= 5000;
+          mag = 1;
+        }
+
+        separatingForce += (hat / mag);
+      }
+    }
   
-
-  for (Boid* neighbor : neighborhood)
-  {
-     Vector2f delta =  (boid->getPosition() - neighbor->getPosition());
-     auto hat = delta.normalized();
-     auto mag = delta.getMagnitude();
-
-    separatingForce += ( hat / mag);
-  }
-
 
  // separatingForce = Vector2f::normalized(separatingForce);
 

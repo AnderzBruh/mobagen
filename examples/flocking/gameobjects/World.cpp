@@ -108,6 +108,13 @@ Boid* World::createBoid() {
   boid->drawDebugRadius = showRadius;
   boid->drawDebugRules = showRules;
 
+  if (boids.size() <= 1) {
+    boid->setIsEnemy(true);
+    boid->setDetectionRadius(detectionRadius * 2);
+    boid->setSpeed(desiredSpeed * 1.5f);
+
+  }
+
   return boid;
 }
 

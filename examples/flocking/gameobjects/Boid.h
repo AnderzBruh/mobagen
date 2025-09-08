@@ -10,6 +10,7 @@ class World;
 class Boid : public Particle {
 private:
   float detectionRadius = 100.;
+  bool isEnemy = false;
 
   std::vector<std::unique_ptr<FlockingRule>> rules;
 
@@ -39,6 +40,10 @@ public:
   }
 
   void setDetectionRadius(float newRadius) { detectionRadius = newRadius; }
+
+  void setIsEnemy(bool ifIsEnemy) { isEnemy = ifIsEnemy; }
+
+  bool getIfEnemy() { return isEnemy; }
 
   float getDetectionRadius() const { return detectionRadius; }
 
