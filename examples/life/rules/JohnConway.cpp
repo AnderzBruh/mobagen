@@ -1,8 +1,27 @@
 #include "JohnConway.h"
 
+struct Position {
+  uint32_t x;
+  uint32_t y;
+
+  Position(uint32_t x, uint32_t y) : x(x), y(y) {}
+
+  size_t hash() { return ((uint64_t))
+  }
+
+};
+
+
+
 // Reference: https://playgameoflife.com/info
 void JohnConway::Step(World& world) {
   // todo: implement
+
+	for (int i = 0; i < world.SideSize(); i++) { // it would be better to only iterate though the tiles that are alive or neighboring an alive tile. an unordered map is faster than a map
+		for (int j = 0; j < world.SideSize(); j++) {
+
+		}
+	}
 }
 
 int JohnConway::CountNeighbors(World& world, Point2D point) {
