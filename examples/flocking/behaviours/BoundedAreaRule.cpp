@@ -2,6 +2,8 @@
 #include "../gameobjects/Boid.h"
 #include "../gameobjects/World.h"
 #include "engine/Engine.h"
+#include <iostream>
+
 
 Vector2f BoundedAreaRule::computeForce(const std::vector<Boid*>& neighborhood, Boid* boid) {
   // Return a force proportional to the proximity of the boids with the bounds, and opposed to it
@@ -10,18 +12,16 @@ Vector2f BoundedAreaRule::computeForce(const std::vector<Boid*>& neighborhood, B
   // todo: add here your code code here do make the boid follow the bounded box rule
   // hint: use this->world->engine->window->size() and desiredDistance
 
-  float Xdist
-      = ((this->world->engine->window->size().x / 2) - desiredDistance) - abs(boid->getPosition().x - (this->world->engine->window->size().x / 2));
-  float Ydist
-      = ((this->world->engine->window->size().y / 2) - desiredDistance) - abs(boid->getPosition().y - (this->world->engine->window->size().y / 2));
+  float Xdist = fmaxf(abs(boid->getPosition().x - ((this->world->engine->window->size().x / 2) - desiredDistance)), 0);
+  float Ydist = fmaxf(abs(boid->getPosition().y - ((this->world->engine->window->size().y / 2) - desiredDistance)), 0);
+  
 
-  if (abs(boid->getPosition().x - (this->world->engine->window->size().x / 2))  > (this->world->engine->window->size().x / 2) - desiredDistance || 
-      abs(boid->getPosition().y - (this->world->engine->window->size().y / 2)) > (this->world->engine->window->size().y / 2) - desiredDistance) {
-  //  force =  (Vector2f((this->world->engine->window->size().x / 2),(this->world->engine->window->size().y / 2)) - boid->getPosition()) / Vector2(Xdist,Ydist);
-   // force = Vector2f(99999, 0);
-  }
+  if (Xdist < .1 || Ydist < .1) {
+    std::cout << Xdist << "," << Ydist <<  std::endl;
   force = (Vector2f((this->world->engine->window->size().x / 2), (this->world->engine->window->size().y / 2)) - boid->getPosition())
           / Vector2(Xdist, Ydist);
+  }
+
 
   return force;
 }
