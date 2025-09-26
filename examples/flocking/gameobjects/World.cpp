@@ -21,7 +21,7 @@ World::World(Engine* pEngine) : GameObject(pEngine) {}
 void World::initializeRules() {
   // Starting Rules
   // parameters: desired separation, weight
-  boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 100.f));
+  boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 25.f));
   // parameters: weight
   boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 4.25f));
   // parameters: weight
@@ -29,7 +29,7 @@ void World::initializeRules() {
   // parameters: weight
   boidsRules.emplace_back(std::make_unique<MouseInfluenceRule>(this, 2.f));
   // parameters: distance from frame border, weight
-  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 20, 8.f, false));
+  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 20, 8.f, true));
   // parameters: weight, angle
   boidsRules.emplace_back(std::make_unique<WindRule>(this, 1.f, 6.f, false));
 

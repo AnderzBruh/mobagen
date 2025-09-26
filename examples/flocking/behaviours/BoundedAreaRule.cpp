@@ -25,7 +25,6 @@ Vector2f BoundedAreaRule::computeForce(const std::vector<Boid*>& neighborhood, B
     force = (Vector2f(this->world->engine->window->size().x / 2, this->world->engine->window->size().y / 2) - boid->getPosition());
     force.x /= Xdist;
     force.y /= Ydist;
-    force *= 9999999;
   }
   //std::cout << boid->getPosition().x << "," << boid->getPosition().y << std::endl;
 
