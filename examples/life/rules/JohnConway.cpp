@@ -1,15 +1,15 @@
 #include "JohnConway.h"
 
-struct Position {
-  uint32_t x;
-  uint32_t y;
-
-  Position(uint32_t x, uint32_t y) : x(x), y(y) {}
-
-  size_t hash() { return ((uint64_t))
-  }
-
-};
+//struct Position {
+//  uint32_t x;
+//  uint32_t y;
+//
+//  Position(uint32_t x, uint32_t y) : x(x), y(y) {}
+//
+//  size_t hash() { return ((uint64_t))
+//  }
+//
+//};
 
 
 

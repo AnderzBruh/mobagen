@@ -23,10 +23,10 @@ Vector2f SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Bo
         auto hat = delta.normalized();
         auto mag = delta.getMagnitude();
 
-        if (neighbor->getIfEnemy()) {// no curve on separation of an enemy, if it sees one on the edge it will imediately go away with speed
-          hat *= 5000;
-          mag = 1;
-        }
+        //if (neighbor->getIfEnemy()) {// no curve on separation of an enemy, if it sees one on the edge it will imediately go away with speed
+        //  hat *= 5000;
+        //  mag = 1;
+        //}
 
         separatingForce += (hat / mag);
       }
@@ -35,7 +35,7 @@ Vector2f SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Bo
 
  // separatingForce = Vector2f::normalized(separatingForce);
 
-  return separatingForce;
+  return separatingForce * weight ;
 }
 
 bool SeparationRule::drawImguiRuleExtra() {

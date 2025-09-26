@@ -31,13 +31,13 @@ Vector2f CohesionRule::computeForce(const std::vector<Boid*>& neighborhood, Boid
 
   }
 
-  if (boid->getIfEnemy()) { // so the enemy does not slow down as it gets closer to its target, multiplied so it gives more "chase"
-    cohesionForce = cohesionForce.normalized() * 500;
-  }
+  //if (boid->getIfEnemy()) { // so the enemy does not slow down as it gets closer to its target, multiplied so it gives more "chase"
+  //  cohesionForce = cohesionForce.normalized() * 500;
+  //}
 
   if (nearEnemy) { //if it gets scared it will ignore it's local flock so it can run away
     cohesionForce = Vector2f::zero();
   }
 
-  return cohesionForce;
+  return cohesionForce*weight;
 }

@@ -12,18 +12,25 @@ Vector2f BoundedAreaRule::computeForce(const std::vector<Boid*>& neighborhood, B
   // todo: add here your code code here do make the boid follow the bounded box rule
   // hint: use this->world->engine->window->size() and desiredDistance
 
-  float Xdist = fmaxf(abs(boid->getPosition().x - ((this->world->engine->window->size().x / 2) - desiredDistance)), 0);
-  float Ydist = fmaxf(abs(boid->getPosition().y - ((this->world->engine->window->size().y / 2) - desiredDistance)), 0);
+  float Xdist = fmaxf(
+     ((this->world->engine->window->size().x / 2) - desiredDistance) - abs(boid->getPosition().x - (this->world->engine->window->size().x / 2)), 0.01);
+  float Ydist = fmaxf(
+      ((this->world->engine->window->size().y / 2) - desiredDistance) - abs(boid->getPosition().y - (this->world->engine->window->size().y / 2)), 0.01);
+
   
 
-  if (Xdist < .1 || Ydist < .1) {
-    std::cout << Xdist << "," << Ydist <<  std::endl;
-  force = (Vector2f((this->world->engine->window->size().x / 2), (this->world->engine->window->size().y / 2)) - boid->getPosition())
-          / Vector2(Xdist, Ydist);
+  if (Xdist < 1 || Ydist < 1) 
+  {
+   // std::cout << Xdist << "," << Ydist <<  std::endl;
+    force = (Vector2f(this->world->engine->window->size().x / 2, this->world->engine->window->size().y / 2) - boid->getPosition());
+    force.x /= Xdist;
+    force.y /= Ydist;
+    force *= 9999999;
   }
+  //std::cout << boid->getPosition().x << "," << boid->getPosition().y << std::endl;
 
 
-  return force;
+  return force * weight;
 }
 
 bool BoundedAreaRule::drawImguiRuleExtra() {
