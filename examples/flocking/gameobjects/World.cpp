@@ -23,13 +23,13 @@ void World::initializeRules() {
   // parameters: desired separation, weight
   boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 100.f));
   // parameters: weight
-  boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 4.25f));
+  boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 15.f));
   // parameters: weight
   boidsRules.emplace_back(std::make_unique<AlignmentRule>(this, 2.9f));
   // parameters: weight
   boidsRules.emplace_back(std::make_unique<MouseInfluenceRule>(this, 2.f));
   // parameters: distance from frame border, weight
-  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 20, 8.f, false));
+  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 20, 20.f, true));
   // parameters: weight, angle
   boidsRules.emplace_back(std::make_unique<WindRule>(this, 1.f, 6.f, false));
 
@@ -108,7 +108,7 @@ Boid* World::createBoid() {
   boid->drawDebugRadius = showRadius;
   boid->drawDebugRules = showRules;
 
-  if (boids.size() <= 2) {
+  if (boids.size() <= 1) {// sets which are the enemies
     boid->setIsEnemy(true);
     boid->setDetectionRadius(detectionRadius * 2);
     boid->setSpeed(desiredSpeed * 1.5f);

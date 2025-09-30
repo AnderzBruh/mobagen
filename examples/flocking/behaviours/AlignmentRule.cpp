@@ -10,7 +10,7 @@ Vector2f AlignmentRule::computeForce(const std::vector<Boid*>& neighborhood, Boi
 
   bool nearEnemy = false;
   
-    if(!boid->getIfEnemy()){
+    if(!boid->getIfEnemy()){ // only aligns if it is not an enemy
 
         for (Boid* neighbor : neighborhood) {// ignores aligning with enemies and flags it if it sees one
           if (!neighbor->getIfEnemy()) {

@@ -13,7 +13,7 @@ private:
   /// MEMBERS
   /// Configuration
   // Boids
-  int nbBoids = 1000;
+  int nbBoids = 500;
 
   bool hasConstantSpeed = false;
   float desiredSpeed = 120.0f;

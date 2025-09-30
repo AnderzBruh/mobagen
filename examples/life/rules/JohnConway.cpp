@@ -20,6 +20,16 @@ void JohnConway::Step(World& world) {
 	for (int i = 0; i < world.SideSize(); i++) { // it would be better to only iterate though the tiles that are alive or neighboring an alive tile. an unordered map is faster than a map
 		for (int j = 0; j < world.SideSize(); j++) {
 
+
+			Point2D point = Point2D(i, j);
+            int count = CountNeighbors(world, point);
+            bool isAlive = world.Get(point);
+
+			if (isAlive && (count < 2 || count > 3)) {world.SetNext(point, false);}
+			if (isAlive && count == 2) {world.SetNext(point, true);}
+			if (count == 3) {world.SetNext(point, true);}
+
+
 		}
 	}
 }
