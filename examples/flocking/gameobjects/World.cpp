@@ -23,13 +23,13 @@ void World::initializeRules() {
   // parameters: desired separation, weight
   boidsRules.emplace_back(std::make_unique<SeparationRule>(this, 25.f, 25.f));
   // parameters: weight
-  boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 15.f));
+  boidsRules.emplace_back(std::make_unique<CohesionRule>(this, 7.f));
   // parameters: weight
-  boidsRules.emplace_back(std::make_unique<AlignmentRule>(this, 2.9f));
+  boidsRules.emplace_back(std::make_unique<AlignmentRule>(this, 10.f));
   // parameters: weight
-  boidsRules.emplace_back(std::make_unique<MouseInfluenceRule>(this, 2.f));
+  boidsRules.emplace_back(std::make_unique<MouseInfluenceRule>(this, 10.f));
   // parameters: distance from frame border, weight
-  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 20, 20.f, true));
+  boidsRules.emplace_back(std::make_unique<BoundedAreaRule>(this, 50, 50.f, true));
   // parameters: weight, angle
   boidsRules.emplace_back(std::make_unique<WindRule>(this, 1.f, 6.f, false));
 
