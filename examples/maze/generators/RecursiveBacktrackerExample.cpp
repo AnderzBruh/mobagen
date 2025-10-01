@@ -3,6 +3,8 @@
 #include "RecursiveBacktrackerExample.h"
 #include <climits>
 bool RecursiveBacktrackerExample::Step(World* w) {
+
+
   // todo: implement this
   return false;
 }
@@ -34,6 +36,10 @@ std::vector<Point2D> RecursiveBacktrackerExample::getVisitables(World* w, const 
   std::vector<Point2D> visitables;
 
   // todo: implement this
+  if (w->GetNorth(p)){visitables.push_back(p);}
+  if (w->GetEast(p)){visitables.push_back(p);}
+  if (w->GetSouth(p)){visitables.push_back(p);}
+  if (w->GetWest(p)){visitables.push_back(p);}
 
   return visitables;
 }
