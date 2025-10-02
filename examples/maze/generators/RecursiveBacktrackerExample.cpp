@@ -2,7 +2,6 @@
 #include "Random.h"
 #include "RecursiveBacktrackerExample.h"
 #include <climits>
-#include <algorithm>
 bool RecursiveBacktrackerExample::Step(World* w) {
 
   if (stack.size() > 0) {
@@ -23,6 +22,7 @@ bool RecursiveBacktrackerExample::Step(World* w) {
     if (visitables.size() > 0) {
 
       Point2D nextPoint = visitables[rand() % visitables.size()];
+      visited[nextPoint.x][nextPoint.y] = false;
       stack.push_back(nextPoint);
 
       Point2D offset =  nowPoint - nextPoint;
@@ -34,7 +34,7 @@ bool RecursiveBacktrackerExample::Step(World* w) {
 
 
     }else {
-      stack.insert(stack.begin(),stack[stack.size()-1]);
+     // stack.insert(stack.begin(),stack[stack.size()-1]);
       stack.pop_back();
       w->SetNodeColor(nowPoint,Color32(0,0,0,255));
 
@@ -47,6 +47,8 @@ bool RecursiveBacktrackerExample::Step(World* w) {
     std::cout << "Added random start point: " << newPoint.x << "," << newPoint.y << std::endl;
 
     stack.push_back(newPoint);
+    visited[newPoint.x][newPoint.y] = true;
+
   //  return false;
   }
   // todo: implement this
@@ -60,7 +62,7 @@ void RecursiveBacktrackerExample::Clear(World* world) {
 
   for (int i = -sideOver2; i <= sideOver2; i++) {
     for (int j = -sideOver2; j <= sideOver2; j++) {
-      visited[i][j] = false;
+      visited[i][j] = true;
     }
   }
 }
@@ -82,10 +84,12 @@ std::vector<Point2D> RecursiveBacktrackerExample::getVisitables(World* w, const 
   // todo: implement this
 
 
-  if (p.y < sideOver2 && std::count(stack.begin(), stack.end(), p + Point2D(0,1)) == 0){visitables.push_back(p + Point2D(0,1));}
-  if (p.x < sideOver2 && std::count(stack.begin(), stack.end(), p + Point2D(1,0)) == 0){visitables.push_back(p + Point2D(1,0));}
-  if (p.y > -sideOver2 && std::count(stack.begin(), stack.end(), p + Point2D(0,-1)) == 0){visitables.push_back(p + Point2D(0,-1));}
-  if (p.x > -sideOver2 && std::count(stack.begin(), stack.end(), p + Point2D(-1,0)) == 0){visitables.push_back(p + Point2D(-1,0));}
+  if (p.y < sideOver2 && visited[p.x][p.y+1] == false){visitables.push_back(p + Point2D(0,1));}
+  if (p.x < sideOver2 && visited[p.x+1][p.y] == false){visitables.push_back(p + Point2D(1,0));}
+  if (p.y > -sideOver2 && visited[p.x][p.y-1] == false){visitables.push_back(p + Point2D(0,-1));}
+  if (p.x > -sideOver2 && visited[p.x-1][p.y] == false){visitables.push_back(p + Point2D(-1,0));}
+
+  std::cout << "Num can visit: " << visitables.size() << std::endl;
 
   return visitables;
 }
