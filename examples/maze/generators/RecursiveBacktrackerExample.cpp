@@ -7,14 +7,14 @@ bool RecursiveBacktrackerExample::Step(World* w) {
   // add the first one if it hasn't started yet
 
   if (stack.size() == 0) {
-    if (visited.size()>0) {return false;}
+    if (visited.size()>0) {std::cout << "Ending Mage Generation" << std::endl; return false;}
 
     Point2D newPoint = randomStartPoint(w);
     stack.push_back(newPoint);
 
     //if the first one in the stack has been visited then we know it's at the end because it will only check this twice, once at the beginning and once at the end
     std::cout << "Added random start point: " << newPoint.x << "," << newPoint.y << std::endl;
-    visited.contains(newPoint.y * w->GetSize() + newPoint.x);
+    visited.insert(newPoint.y * w->GetSize() + newPoint.x);
   }
 
   // get the last element in the stack and find its neighbors
@@ -57,7 +57,7 @@ Point2D RecursiveBacktrackerExample::randomStartPoint(World* world) {
   // todo: change this if you want
   for (int y = -sideOver2; y <= sideOver2; y++)
     for (int x = -sideOver2; x <= sideOver2; x++)
-      if (visited.contains(y*world->GetSize()+x)) return {x, y};
+      if (!visited.contains(y*world->GetSize()+x)) return {x, y};
   return {INT_MAX, INT_MAX};
 }
 
