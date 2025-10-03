@@ -4,12 +4,13 @@
 #include "../MazeGeneratorBase.h"
 #include "math/Point2D.h"
 #include <map>
+#include <unordered_set>
 #include <vector>
 
 class RecursiveBacktrackerExample : public MazeGeneratorBase {
 private:
   std::vector<Point2D> stack;
-  std::map<int, std::map<int, bool>> visited;  // naive. not optimal
+  std::unordered_set<size_t> visited;
   Point2D randomStartPoint(World* world);
   std::vector<Point2D> getVisitables(World* w, const Point2D& p);
 
