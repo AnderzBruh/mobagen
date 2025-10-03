@@ -13,6 +13,8 @@ private:
   std::vector<Point2D> getVisitables(World* w, const Point2D& p);
   std::vector<Point2D> getVisitedNeighbors(World* w, const Point2D& p);
 
+  bool isVisitable(World* w, const Point2D& p);
+
 public:
   PrimExample() = default;
   std::string GetName() override { return "Prim"; };
