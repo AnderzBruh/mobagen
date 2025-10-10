@@ -8,6 +8,7 @@ Point2D Catcher::Move(World* world) {
   //   auto cat = world->getCat();
   //   if (cat.x != p.x && cat.y != p.y && !world->getContent(p)) return p;
   // }
+
   return generatePath(world).front();
 
 }

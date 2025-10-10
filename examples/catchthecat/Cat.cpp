@@ -21,5 +21,6 @@ Point2D Cat::Move(World* world) {
   //   default:
   //     throw "random out of range";
   // }
+
   return generatePath(world).back();
 }
