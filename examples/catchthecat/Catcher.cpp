@@ -9,6 +9,17 @@ Point2D Catcher::Move(World* world) {
   //   if (cat.x != p.x && cat.y != p.y && !world->getContent(p)) return p;
   // }
 
-  return generatePath(world).front();
+  std::vector<Point2D> path = generatePath(world);
+  if (path.size() == 0) {
+    std::unordered_map<Point2D, bool> visitied;
+    std::unordered_set<Point2D> frontier;
+
+    std::vector<Point2D> neighbors = getVisitableNeightbors(world, world->getCat(), visitied,frontier);
+
+    auto rand = Random::Range(0, neighbors.size());
+
+    return neighbors[rand];
+
+  }else{ return path.front();}
 
 }

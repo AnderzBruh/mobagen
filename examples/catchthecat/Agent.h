@@ -2,6 +2,10 @@
 #define AGENT_H
 #include "math/Point2D.h"
 #include <vector>
+#include <unordered_map>
+#include <queue>
+#include <unordered_set>
+
 
 class World;
 
@@ -13,7 +17,7 @@ public:
 
   std::vector<Point2D> generatePath(World* w);
 
-  std::vector<Point2D> getVisitableNeightbors(World* w, Point2D current);
+  std::vector<Point2D> getVisitableNeightbors(World* w, Point2D current,std::unordered_map<Point2D, bool> visited,std::unordered_set<Point2D> frontier);
 };
 
 #endif  // AGENT_H
