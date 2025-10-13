@@ -18,6 +18,29 @@ void World::print() {
   }
 }
 
+void World::printPathfinding(std::unordered_map<Point2D, bool> visited,std::unordered_set<Point2D> frontier) {
+  std::unordered_set<int> visitedInt;
+  std::unordered_set<int> frontierInt;
+  for (auto pair : visited) {
+    visitedInt.insert((pair.first.y + sideSize / 2) * sideSize + (pair.first.x + sideSize / 2));
+  }
+  for (auto point : frontier) {
+    frontierInt.insert((point.y + sideSize / 2) * sideSize + (point.x + sideSize / 2));
+  }
+
+  auto catposid = (catPosition.y + sideSize / 2) * sideSize + (catPosition.x + sideSize / 2);
+  for (int i = 0; i < worldState.size();) {
+    std::cout << ((i == catposid) ? ('C') : ((worldState[i]) ? ('#') : ((visitedInt.contains(i)) ? ('v') : ((frontierInt.contains(i)) ? ('f') : ('.')))));
+    i++;
+    if ((i + sideSize) % (2 * sideSize) == 0)
+      std::cout << std::endl << " ";
+    else if (i % sideSize == 0)
+      std::cout << std::endl;
+    else
+      std::cout << " ";
+  }
+}
+
 World::World(Engine* pEngine, int size) : GameObject(pEngine), sideSize(size) {
   if (size % 2 == 0) throw;
   cat = new Cat();

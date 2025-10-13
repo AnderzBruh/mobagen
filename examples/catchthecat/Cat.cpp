@@ -5,7 +5,7 @@
 Point2D Cat::Move(World* world) {
 
   std::vector<Point2D> path = generatePath(world);
-  std::cout << path.size() << std::endl;
+//  std::cout << path.size() << std::endl;
 
   if (path.size() == 0) {
     std::unordered_map<Point2D, bool> visitied;
@@ -13,13 +13,13 @@ Point2D Cat::Move(World* world) {
 
     std::vector<Point2D> neighbors = getVisitableNeightbors(world, world->getCat(), visitied, frontier);
 
-    auto rand = Random::Range(0, neighbors.size());
-
+    auto rand = Random::Range(0, neighbors.size()-1);
+    std::cout << "Cat picking random movement" << std::endl;
     return neighbors[rand];
 
   }
   else {
-    std::cout << path.back().x << "," << path.back().y << std::endl;
+   // std::cout << path.back().x << "," << path.back().y << std::endl;
     return path.back();
   }
 
