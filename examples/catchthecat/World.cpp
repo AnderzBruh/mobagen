@@ -30,7 +30,7 @@ void World::printPathfinding(std::unordered_map<Point2D, bool> visited,std::unor
 
   auto catposid = (catPosition.y + sideSize / 2) * sideSize + (catPosition.x + sideSize / 2);
   for (int i = 0; i < worldState.size();) {
-    std::cout << ((i == catposid) ? ('C') : ((worldState[i]) ? ('#') : ((visitedInt.contains(i)) ? ('v') : ((frontierInt.contains(i)) ? ('f') : ('.')))));
+    std::cout << ((i == catposid) ? ('C') : ((worldState[i]) ? ('#') : ((visitedInt.contains(i)) ? ('-') : ((frontierInt.contains(i)) ? ('f') : ('.')))));
     i++;
     if ((i + sideSize) % (2 * sideSize) == 0)
       std::cout << std::endl << " ";

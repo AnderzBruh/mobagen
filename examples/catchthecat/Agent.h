@@ -4,6 +4,8 @@
 #include <vector>
 #include <unordered_map>
 #include <queue>
+#include <map>
+#include <list>
 #include <unordered_set>
 
 
@@ -15,7 +17,7 @@ public:
 
   virtual Point2D Move(World*) = 0;
 
-  std::vector<Point2D> generatePath(World* w);
+  std::vector<Point2D> generatePath(World* w, bool useWeights);
 
   std::vector<Point2D> getVisitableNeightbors(World* w, Point2D current,std::unordered_map<Point2D, bool> visited,std::unordered_set<Point2D> frontier);
 };

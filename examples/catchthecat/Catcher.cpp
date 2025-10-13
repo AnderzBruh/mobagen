@@ -9,7 +9,7 @@ Point2D Catcher::Move(World* world) {
   //   if (cat.x != p.x && cat.y != p.y && !world->getContent(p)) return p;
   // }
 
-  std::vector<Point2D> path = generatePath(world);
+  std::vector<Point2D> path = generatePath(world,false);
     // for (int i =2;i<path.size()+1; i++) {
     //   path.push_back(path[path.size()-i]);
     //   path.erase(std::next(path.begin(), i-1), std::next(path.begin(), i));
@@ -42,10 +42,10 @@ Point2D Catcher::Move(World* world) {
 
   }
 
-  std::cout << "Scores: " << std::endl;
-  for (int i =1; i <= pathScore.size(); i++) {
-    std::cout << pathScore[pathScore.size() -i] << std::endl;
-  }
+  // std::cout << "Scores: " << std::endl;
+  // for (int i =1; i <= pathScore.size(); i++) {
+  //   std::cout << pathScore[pathScore.size() -i] << std::endl;
+  // }
 
  // world->printPathfinding(blankVisitied, blankFrontier);
 
@@ -59,7 +59,7 @@ Point2D Catcher::Move(World* world) {
       return path[path.size()-1];
     }
     if (frontNeig.size() == 0) {
-      std::cout << "Check (front)" << std::endl;
+      std::cout << "Check (back)" << std::endl;
       return catNeig.front();
     }
     if (catNeig.size() ==0) {
@@ -78,7 +78,7 @@ Point2D Catcher::Move(World* world) {
 
     if (pathScore[pathScore.size()-i]+pathScore[pathScore.size()-(i-1)]+pathScore[pathScore.size()-(i-2)] > 6-(i)){
 
-      std::cout << "Total score of "<< pathScore[pathScore.size()-i]+pathScore[pathScore.size()-(i-1)]+pathScore[pathScore.size()-(i-2)] << " is greater than 6-" << i << std::endl;
+     // std::cout << "Total score of "<< pathScore[pathScore.size()-i]+pathScore[pathScore.size()-(i-1)]+pathScore[pathScore.size()-(i-2)] << " is greater than 6-" << i << std::endl;
 
       std::vector<Point2D> candidates;
 
@@ -89,7 +89,7 @@ Point2D Catcher::Move(World* world) {
           blankVisitied[point] = true;
         }
       }
-      world->printPathfinding(blankVisitied, blankFrontier);
+     // world->printPathfinding(blankVisitied, blankFrontier);
 
       if (candidates.size() == 0) {break;}
       return candidates.front();
