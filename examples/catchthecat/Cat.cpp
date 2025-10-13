@@ -7,7 +7,7 @@ Point2D Cat::Move(World* world) {
   std::vector<Point2D> path = generatePath(world);
 //  std::cout << path.size() << std::endl;
 
-  if (path.size()%2 == 0 || true) {
+  if (path.size() % 3 == 0) {//every three times it goes a random direction to throw off potential traps
     std::unordered_map<Point2D, bool> visitied;
     std::unordered_set<Point2D> frontier;
 
