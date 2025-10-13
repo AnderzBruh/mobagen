@@ -49,18 +49,30 @@ Point2D Catcher::Move(World* world) {
 
  // world->printPathfinding(blankVisitied, blankFrontier);
 
-  int catNumNeig =getVisitableNeightbors(world, world->getCat(), blankVisitied, blankFrontier).size();
+  std::vector<Point2D> catNeig =getVisitableNeightbors(world, world->getCat(), blankVisitied, blankFrontier);
+  std::vector<Point2D> backNeig =getVisitableNeightbors(world, catNeig.front(), blankVisitied, blankFrontier);
+  std::vector<Point2D> frontNeig =getVisitableNeightbors(world, path[path.size()-1], blankVisitied, blankFrontier);
 
-  if (catNumNeig <=2) {
-    if (getVisitableNeightbors(world, path[path.size()-1], blankVisitied, blankFrontier).size() == 0) {
-      std::cout << "Check" << std::endl;
-      return getVisitableNeightbors(world, world->getCat(), blankVisitied, blankFrontier).front();
+
+    if (backNeig.size() <= 1) {
+      std::cout << "Check (front)" << std::endl;
+      return path[path.size()-1];
     }
-    std::cout << "Checkmate" << std::endl;
-    return path[path.size()-1];
-  }
-
-
+    if (frontNeig.size() == 0) {
+      std::cout << "Check (front)" << std::endl;
+      return catNeig.front();
+    }
+    if (catNeig.size() ==0) {
+      std::cout << "Checkmate" << std::endl;
+      return path[path.size()-1];
+    }
+    // if (frontNeig.size() == 0) {
+    //   std::cout << "Check" << std::endl;
+    //
+    //   if (!backNeig.size() == 0){
+    //     return catNeig.front();
+    //   }
+    // }
 
   for (int i =3; i <= pathScore.size(); i++) {//search through the path and its scores to find a suitable place to make the trap
 

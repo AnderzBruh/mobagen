@@ -7,7 +7,7 @@ Point2D Cat::Move(World* world) {
   std::vector<Point2D> path = generatePath(world);
 //  std::cout << path.size() << std::endl;
 
-  if (path.size() == 0) {
+  if (path.size()%2 == 0 || true) {
     std::unordered_map<Point2D, bool> visitied;
     std::unordered_set<Point2D> frontier;
 
