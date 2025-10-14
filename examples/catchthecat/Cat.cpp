@@ -4,7 +4,7 @@
 
 Point2D Cat::Move(World* world) {
 
-  std::vector<Point2D> path = generatePath(world, true);
+  std::vector<Point2D> path = generatePath(world, false);
 //  std::cout << path.size() << std::endl;
 
   if (path.size() == 0) {//every three times it goes a random direction to throw off potential traps
