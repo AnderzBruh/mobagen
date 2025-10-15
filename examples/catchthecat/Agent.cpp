@@ -35,7 +35,7 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
       std::unordered_map<Point2D, bool> blankVisitied;
       std::unordered_set<Point2D> blankFrontier;
       weights[visitable] = weights[current] + (6-getVisitableNeightbors(w, current, blankVisitied, blankFrontier).size()) * 1.0f + 1;// for every neighbor set the cameFrom
-      if (w->catWinsOnSpace(visitable)){weights[visitable] += 5.0f* (w->getWorldSideSize()*2 - (abs(visitable.x - w->getWorldSideSize()/2) + abs(visitable.y - w->getWorldSideSize()/2))) ;}
+      if (w->catWinsOnSpace(visitable)){weights[visitable] += 2.5f* (w->getWorldSideSize()*2 - (abs(visitable.x - w->getWorldSideSize()/2) + abs(visitable.y - w->getWorldSideSize()/2))) ;}
 
     if (useWeights) {
      // cout << "using weight" << endl;

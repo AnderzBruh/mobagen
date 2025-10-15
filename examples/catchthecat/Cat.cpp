@@ -13,7 +13,7 @@ Point2D Cat::Move(World* world) {
 
     std::vector<Point2D> neighbors = getVisitableNeightbors(world, world->getCat(), visitied, frontier);
 
-    int winningScore = 0;
+    int winningScore = -1;
     Point2D winningPoint;
 
     for (auto neig: neighbors) {
