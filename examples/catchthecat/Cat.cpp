@@ -7,18 +7,18 @@ Point2D Cat::Move(World* world) {
   std::vector<Point2D> path = generatePath(world, true);
 //  std::cout << path.size() << std::endl;
 
-  if (path.size() == 0) {//every three times it goes a random direction to throw off potential traps
+  if (path.size() == 0) {//
     std::unordered_map<Point2D, bool> visitied;
     std::unordered_set<Point2D> frontier;
 
     std::vector<Point2D> neighbors = getVisitableNeightbors(world, world->getCat(), visitied, frontier);
 
-    int winningScore = 10;
+    int winningScore = 0;
     Point2D winningPoint;
 
     for (auto neig: neighbors) {
       int score = getVisitableNeightbors(world, neig, visitied, frontier).size();
-      if ( score < winningScore ) {
+      if ( score > winningScore ) {
         winningScore = score;
         winningPoint = neig;
       };
