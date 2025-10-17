@@ -37,8 +37,8 @@ Point2D Cat::Move(World* world) {
     for (auto point : path) {
       blankFrontier.insert(point);
     }
-    std::cout << "Cat path:" << std::endl;
-    world->printPathfinding(blankVisitied, blankFrontier);
+   // std::cout << "Cat path:" << std::endl;
+    //world->printPathfinding(blankVisitied, blankFrontier);
 
     return path.back();
   }

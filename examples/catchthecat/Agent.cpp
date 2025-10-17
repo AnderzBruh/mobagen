@@ -7,7 +7,7 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
   vector<Point2D> frontier;                   // to store next ones to visit
   unordered_set<Point2D> frontierSet;        // OPTIMIZATION to check faster if a point is in the queue
   unordered_map<Point2D, bool> visited;      // use .at() to get data, if the element dont exist [] will give you wrong results
-  unordered_map<Point2D,int> weights;
+  unordered_map<Point2D,float> weights;
   // bootstrap state
   auto catPos = w->getCat();
   frontier.push_back(catPos);
@@ -29,13 +29,13 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
     std::vector<Point2D> visitables =  getVisitableNeightbors(w, current, visited, frontierSet); // returns a vector of neighbors that are not visited, not cat, not block, not in the queue
 
     for (auto visitable : visitables) {// iterate over the neighs:
-      //cout << "looked at visitable" << endl;
+     // cout << "looking at: " << visitable.x << "," << visitable.y << endl;
        cameFrom[visitable] = current;
 
       std::unordered_map<Point2D, bool> blankVisitied;
       std::unordered_set<Point2D> blankFrontier;
-      weights[visitable] = weights[current] + (6-getVisitableNeightbors(w, current, blankVisitied, blankFrontier).size()) * 1.0f + 1;// for every neighbor set the cameFrom
-      if (w->catWinsOnSpace(visitable)){weights[visitable] += 1.0f* (w->getWorldSideSize()*2 - (abs(visitable.x - w->getWorldSideSize()/2) + abs(visitable.y - w->getWorldSideSize()/2))) ;}
+      weights[visitable] = weights[current] + (6-getVisitableNeightbors(w, current, blankVisitied, blankFrontier).size()) * 0.0f + 1;// for every neighbor set the cameFrom
+      if (w->catWinsOnSpace(visitable)){weights[visitable] += 0.9f* (w->getWorldSideSize()*0.8f - (abs(visitable.x) + abs(visitable.y))) ;}
 
     if (useWeights) {
      // cout << "using weight" << endl;
@@ -69,7 +69,16 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
    // cout << w->catWinsOnSpace(current) << endl;
 
 
-    if (w->catWinsOnSpace(current)){borderExit = current; break;}// do this up to find a visitable border and break the loop
+    if (w->catWinsOnSpace(current)) {
+    //  w->printPathfindingWeights(weights);
+      borderExit = current;
+      break;
+    }// do this up to find a visitable border and break the loop
+
+   // cout << "weights" << endl;
+   // w->printPathfindingWeights(weights);
+  //  cout << "frontier" << endl;
+
    // w->printPathfinding(visited,frontierSet);
 
   }

@@ -41,6 +41,36 @@ void World::printPathfinding(std::unordered_map<Point2D, bool> visited,std::unor
   }
 }
 
+void World::printPathfindingWeights(std:: unordered_map<Point2D,float> weights) {
+  std::unordered_map<int,float> weightsInt;
+  for (auto pair : weights) {
+    weightsInt[(pair.first.y + sideSize / 2) * sideSize + (pair.first.x + sideSize / 2)] = pair.second;
+  }
+
+
+  auto catposid = (catPosition.y + sideSize / 2) * sideSize + (catPosition.x + sideSize / 2);
+  for (int i = 0; i < worldState.size();) {
+
+    std::string out;
+    out = '.';
+    if(weightsInt.contains(i)){out = std::to_string((int)weightsInt[i]);}
+    if(worldState[i]){out = '#';}
+    if(i == catposid){out = 'C';}
+    for (int i = 0; i < 4-out.length(); i++) {out += " ";}
+
+    std::cout << out;
+
+    i++;
+    if ((i + sideSize) % (2 * sideSize) == 0)
+      std::cout << std::endl << " ";
+    else if (i % sideSize == 0)
+      std::cout << std::endl;
+    else
+      std::cout << " ";
+  }
+}
+
+
 World::World(Engine* pEngine, int size) : GameObject(pEngine), sideSize(size) {
   if (size % 2 == 0) throw;
   cat = new Cat();

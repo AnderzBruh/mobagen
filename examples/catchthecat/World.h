@@ -78,6 +78,7 @@ public:
   // print the world state
   void print();
   void printPathfinding(std::unordered_map<Point2D, bool> visited,std::unordered_set<Point2D> frontier);
+  void printPathfindingWeights(std:: unordered_map<Point2D,float> weights);
 
   // check if point is inside the world
   bool isValidPosition(const Point2D& p);
