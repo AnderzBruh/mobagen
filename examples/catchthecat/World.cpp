@@ -52,21 +52,22 @@ void World::printPathfindingWeights(std:: unordered_map<Point2D,float> weights) 
   for (int i = 0; i < worldState.size();) {
 
     std::string out;
-    out = '.';
-    if(weightsInt.contains(i)){out = std::to_string((int)(weightsInt[i]*10));}
-    if(worldState[i]){out = '#';}
-    if(i == catposid){out = 'C';}
-    for (int i = 0; i < 4-out.length(); i++) {out += " ";}
+    out = ".";
+    if(weightsInt.contains(i)){out = std::to_string((int)(weightsInt[i]*1));}
+    if(worldState[i]){out = "#";}
+    if(i == catposid){out = "C";}
+    int outLeng = out.length();
+    for (int i = 0; i < 3-outLeng; i++) {out.append(" ");}
 
     std::cout << out;
 
     i++;
     if ((i + sideSize) % (2 * sideSize) == 0)
-      std::cout << std::endl << " ";
+      std::cout << std::endl << "  ";
     else if (i % sideSize == 0)
       std::cout << std::endl;
     else
-      std::cout << " ";
+      std::cout << "  ";
   }
 }
 
