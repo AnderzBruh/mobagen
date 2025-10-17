@@ -38,8 +38,8 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
 
       std::unordered_map<Point2D, bool> blankVisitied;
       std::unordered_set<Point2D> blankFrontier;
-      weights[visitable] = weights[current] + (6-getVisitableNeightbors(w, current, blankVisitied, blankFrontier).size()) * 0.0f + 1;// for every neighbor set the cameFrom
-      if (w->catWinsOnSpace(visitable)){weights[visitable] += 0.9f* (w->getWorldSideSize()*0.8f - (abs(visitable.x) + abs(visitable.y))) ;}
+      weights[visitable] = weights[current] + (6-getVisitableNeightbors(w, current, blankVisitied, blankFrontier).size()) * 0.5f + 1;// for every neighbor set the cameFrom
+      if (w->catWinsOnSpace(visitable)){weights[visitable] += 6.5f* ((w->getWorldSideSize()*2.0f) / (abs(visitable.x) + abs(visitable.y))) ;}
 
      // cout << "using weight" << endl;
       for (int i = 0; i < frontier.size(); i++) {
@@ -73,7 +73,7 @@ std::vector<Point2D> Agent::generatePath(World* w, bool useWeights) {
 
 
     if (w->catWinsOnSpace(current)) {
-    //  w->printPathfindingWeights(weights);
+      if (useWeights){w->printPathfindingWeights(weights);}
       borderExit = current;
       break;
     }// do this up to find a visitable border and break the loop

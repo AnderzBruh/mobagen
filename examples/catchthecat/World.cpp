@@ -53,7 +53,7 @@ void World::printPathfindingWeights(std:: unordered_map<Point2D,float> weights) 
 
     std::string out;
     out = '.';
-    if(weightsInt.contains(i)){out = std::to_string((int)weightsInt[i]);}
+    if(weightsInt.contains(i)){out = std::to_string((int)(weightsInt[i]*10));}
     if(worldState[i]){out = '#';}
     if(i == catposid){out = 'C';}
     for (int i = 0; i < 4-out.length(); i++) {out += " ";}
